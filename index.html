@@ -5,12 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cámara Web App</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
+        body { text-align: center; font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
         video, canvas, img { width: 100%; max-width: 400px; border: 2px solid black; margin-top: 10px; }
-        button { margin: 10px; padding: 10px; font-size: 16px; }
+        button { margin: 10px; padding: 10px; font-size: 16px; cursor: pointer; border: none; border-radius: 5px; }
+        #startCam { background-color: #007bff; color: white; }
+        #capture { background-color: #28a745; color: white; }
+        #download { background-color: #ffc107; color: black; display: none; padding: 10px; text-decoration: none; }
+        img.logo { width: 150px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
+
+    <!-- Logo de la marca -->
+    <img src="unnamed.png" alt="Logo Virtual 360" class="logo">
 
     <h1>Captura de Foto con Cámara</h1>
 
@@ -21,7 +28,7 @@
     <canvas id="canvas" style="display: none;"></canvas>
     <img id="photo" alt="Foto Capturada">
 
-    <a id="download" style="display: none;" download="photo.png">Descargar Foto</a>
+    <a id="download" download="photo.png">Descargar Foto</a>
 
     <script>
         const video = document.getElementById('video');
