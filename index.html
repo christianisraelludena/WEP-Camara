@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cámara Web App</title>
+    <title>Cámara Web App con Logo</title>
     <style>
         body { text-align: center; font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
         video, canvas, img { width: 100%; max-width: 400px; border: 2px solid black; margin-top: 10px; }
@@ -11,13 +11,9 @@
         #startCam { background-color: #007bff; color: white; }
         #capture { background-color: #28a745; color: white; }
         #download { background-color: #ffc107; color: black; display: none; padding: 10px; text-decoration: none; }
-        img.logo { width: 150px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
-
-    <!-- Logo de la marca -->
-    <img src="unnamed.png" alt="Logo Virtual 360" class="logo">
 
     <h1>Captura de Foto con Cámara</h1>
 
@@ -39,6 +35,8 @@
         const download = document.getElementById('download');
 
         let stream = null;
+        let logo = new Image();
+        logo.src = "unnamed.png"; // Ruta del logo
 
         startCam.addEventListener('click', async () => {
             try {
@@ -57,7 +55,15 @@
             const ctx = canvas.getContext('2d');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
+
+            // Dibujar la imagen de la cámara
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Dibujar el logo en la esquina inferior derecha
+            const logoSize = canvas.width * 0.3; // 30% del ancho del canvas
+            ctx.drawImage(logo, canvas.width - logoSize - 10, canvas.height - logoSize - 10, logoSize, logoSize);
+
+            // Mostrar la foto con el logo
             const imageUrl = canvas.toDataURL('image/png');
             photo.src = imageUrl;
             download.href = imageUrl;
