@@ -5,9 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cámara Web App con Logo</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
-        video, canvas, img { width: 100%; max-width: 400px; border: 2px solid black; margin-top: 10px; }
-        button { margin: 10px; padding: 10px; font-size: 16px; cursor: pointer; border: none; border-radius: 5px; }
+        body { text-align: center; font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; position: relative; }
+        
+        .camera-container {
+            display: inline-block;
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        video, canvas, img { width: 100%; border: 2px solid black; margin-top: 10px; }
+
+        .logo-overlay {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 30%;
+            opacity: 0.8;
+        }
+
+        button {
+            margin: 10px; 
+            padding: 10px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 5px;
+        }
+
         #startCam { background-color: #007bff; color: white; }
         #capture { background-color: #28a745; color: white; }
         #download { background-color: #ffc107; color: black; display: none; padding: 10px; text-decoration: none; }
@@ -17,7 +42,11 @@
 
     <h1>Captura de Foto con Cámara</h1>
 
-    <video id="video" autoplay playsinline></video>
+    <div class="camera-container">
+        <video id="video" autoplay playsinline></video>
+        <img src="unnamed.png" class="logo-overlay" alt="Logo">  <!-- Logo sobre el video -->
+    </div>
+
     <button id="startCam">Activar Cámara</button>
     <button id="capture">Tomar Foto</button>
 
@@ -60,7 +89,7 @@
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
             // Dibujar el logo en la esquina inferior derecha
-            const logoSize = canvas.width * 0.3; // 30% del ancho del canvas
+            const logoSize = canvas.width * 0.3;
             ctx.drawImage(logo, canvas.width - logoSize - 10, canvas.height - logoSize - 10, logoSize, logoSize);
 
             // Mostrar la foto con el logo
